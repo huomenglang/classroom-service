@@ -38,4 +38,5 @@ public class TimeTable extends AuditEntity<Long> {
 
     @Column(name = "end_time")
     private LocalTime endTime;
+
 }
