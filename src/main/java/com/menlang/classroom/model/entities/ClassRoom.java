@@ -5,6 +5,8 @@ import com.menlang.classroom.model.audit.AuditEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "classromm")
 @Builder
@@ -12,7 +14,7 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ClassRoom extends AuditEntity<Long>{
+public class ClassRoom extends AuditEntity<Long> implements Serializable {
 
     @Column(unique = true, nullable = false,length = 30)
     private String name;
@@ -24,5 +26,9 @@ public class ClassRoom extends AuditEntity<Long>{
     @Column(nullable = false)
     private Long academicYear;
 
-    private Long teacherId;
+    private Long teacher;
+
+    private String description;
+
+    private Boolean enabled;
 }
