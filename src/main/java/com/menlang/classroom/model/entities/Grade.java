@@ -6,14 +6,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Entity
-@Table(name = "grade")
+@Table(name = "grades")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Grade extends AuditEntity<Long> {
+public class Grade extends AuditEntity<Long> implements Serializable {
 
     @Column(length = 20,unique=true)
     private String grade;

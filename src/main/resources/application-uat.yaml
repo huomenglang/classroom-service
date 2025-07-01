@@ -11,6 +11,11 @@ spring:
     #url: jdbc:postgresql://postgres:5432/ac_service # account_db  get from NAMES of postgres build container using network
     username: postgres
     password: lang@123
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 30000
+      pool-name: HikariCP
   jpa:
     hibernate:
       ddl-auto: update

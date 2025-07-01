@@ -4,12 +4,18 @@ spring:
     ansi:
       enabled: ALWAYS
   application:
-    name: teacher
+    name: classroom
   datasource:
     url: jdbc:h2:file:D:/others/Learing/h2/classroom/classroom_service;DB_CLOSE_DELAY=-1;
     username: lang
     password: lang123
     driver-class-name: org.h2.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 30000
+      pool-name: HikariCP
+
   h2:
     console:
       enabled: true

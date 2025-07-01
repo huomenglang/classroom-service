@@ -1,4 +1,4 @@
-package com.menlang.classroom.dto;
+package com.menlang.classroom.dto.subject;
 
 import com.menlang.classroom.model.entities.Subject;
 import org.mapstruct.Mapper;

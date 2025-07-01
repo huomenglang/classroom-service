@@ -1,16 +1,15 @@
 package com.menlang.classroom.service.subject;
 
 import com.menglang.common.library.exceptions.common.BadRequestException;
+import com.menglang.common.library.exceptions.common.ConflictException;
 import com.menglang.common.library.exceptions.common.NotFoundException;
-import com.menglang.common.library.page.PageResponse;
 import com.menglang.common.library.page.filter.FilterBy;
-import com.menglang.common.library.page.paginate.BasePageResponse;
 import com.menglang.common.library.page.parser.BaseSpecification;
 import com.menglang.common.library.page.parser.PageableParser;
 import com.menglang.common.library.page.parser.QueryParamParser;
-import com.menlang.classroom.dto.SubjectMapper;
-import com.menlang.classroom.dto.SubjectRequest;
-import com.menlang.classroom.dto.SubjectResponse;
+import com.menlang.classroom.dto.subject.SubjectMapper;
+import com.menlang.classroom.dto.subject.SubjectRequest;
+import com.menlang.classroom.dto.subject.SubjectResponse;
 import com.menlang.classroom.model.entities.Subject;
 import com.menlang.classroom.repository.SubjectRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +33,7 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public SubjectResponse create(SubjectRequest dto) {
         Subject subject = mapper.toEntity(dto);
+        if(this.findSubjectByName(dto.name())) throw new ConflictException("Subject Already Exist!");
         try {
             return mapper.toResponse(subjectRepository.save(subject));
         } catch (BadRequestException e) {
@@ -49,6 +49,7 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public SubjectResponse update(Long id, SubjectRequest dto) {
         Subject subject=this.findSubjectById(id);
+        if(this.findSubjectByName(dto.name())) throw new ConflictException("Subject Already Exist!");
         mapper.updateEntity(dto,subject);
         try{
             return mapper.toResponse(subjectRepository.save(subject));
@@ -65,6 +66,7 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public SubjectResponse delete(Long id) {
         Subject subject=this.findSubjectById(id);
+
         try{
             subjectRepository.deleteById(id);
             return mapper.toResponse(subject);
@@ -101,5 +103,9 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public List<SubjectResponse> getPageContent(Page<Subject> pageData){
         return pageData.getContent().stream().map(mapper::toResponse).toList();
+    }
+
+    private boolean findSubjectByName(String name){
+        return subjectRepository.findSubjectByName(name);
     }
 }

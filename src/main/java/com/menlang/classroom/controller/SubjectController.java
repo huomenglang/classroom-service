@@ -1,22 +1,25 @@
 package com.menlang.classroom.controller;
 import com.menglang.common.library.page.PageResponse;
 import com.menglang.common.library.page.PageResponseHandler;
-import com.menlang.classroom.dto.SubjectRequest;
-import com.menlang.classroom.dto.SubjectResponse;
+import com.menlang.classroom.dto.subject.SubjectRequest;
+import com.menlang.classroom.dto.subject.SubjectResponse;
 import com.menlang.classroom.model.entities.Subject;
 import com.menlang.classroom.service.subject.SubjectService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("api/v1/subjects")
+@RequestMapping("/api/v1/subjects")
 @RequiredArgsConstructor
 public class SubjectController {
+    private static final Logger log = LoggerFactory.getLogger(SubjectController.class);
     private final SubjectService subjectService;
 
     @GetMapping("/{id}")
@@ -25,13 +28,13 @@ public class SubjectController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<PageResponse> create(@RequestBody SubjectRequest dto){
+    public ResponseEntity<PageResponse> create(@Valid @RequestBody SubjectRequest dto){
+        log.info("invalid data {}",dto.name());
         return PageResponseHandler.success(subjectService.create(dto),null,"Create Successful");
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PageResponse> update(@PathVariable Long id,@RequestBody SubjectRequest dto){
+    public ResponseEntity<PageResponse> update(@PathVariable Long id,@Valid @RequestBody SubjectRequest dto){
         return PageResponseHandler.success(subjectService.update(id,dto),null,"Update Successful");
     }
 
