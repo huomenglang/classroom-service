@@ -19,6 +19,10 @@ configurations {
 	}
 }
 
+ext {
+	set('springCloudVersion', "2024.0.0")
+}
+
 repositories {
 	mavenCentral()
 	mavenLocal()
@@ -36,11 +40,23 @@ dependencies {
 	implementation("org.mapstruct:mapstruct:1.6.3")
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-//	runtimeOnly 'org.postgresql:postgresql'
-	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'org.postgresql:postgresql'
+//	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+	implementation('org.springframework.cloud:spring-cloud-starter')
+
+}
+
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
 }
 
 tasks.named('test') {

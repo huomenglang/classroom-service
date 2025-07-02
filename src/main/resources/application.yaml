@@ -1,5 +1,17 @@
 server:
   port: 8083
 spring:
+  application:
+    name: teacher
   profiles:
-    active: dev
+    active: uat
+  config:
+    import: optional:configserver:http://configserver:8088/
+#  cloud:
+#    config:
+#      fail-fast: true  # Fail startup if cannot connect to config server
+#      retry:
+#        initial-interval: 1000
+#        max-interval: 2000
+#        multiplier: 1.1
+#        max-attempts: 20
