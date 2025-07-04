@@ -7,9 +7,18 @@ import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "attendance")
+@Table(
+        name = "attendances",
+        indexes = {
+                @Index(name = "idx_student_id", columnList = "student_id"),
+        },
+
+        uniqueConstraints = @UniqueConstraint(columnNames = {"student_id", "attendance_date", "time_slot_id"})
+)
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,13 +36,17 @@ public class Attendance extends BaseEntity<Long> {
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
-
-    private Long teacherId;
+    @Column(name = "teacher_id")
+    private Long teacher;
 
     @Enumerated(EnumType.STRING)
     private AttendanceStatus status;
 
+    @ManyToOne
+    @JoinColumn(name = "time_slot_id")
+    private Timeslot timeSlot;
+
     @CreatedDate
     @Column(name = "attendance_date")
-    private LocalDate date;
+    private LocalDateTime datetime;
 }
