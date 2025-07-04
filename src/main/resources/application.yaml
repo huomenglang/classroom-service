@@ -2,9 +2,9 @@ server:
   port: 8083
 spring:
   application:
-    name: teacher
+    name: classroom
   profiles:
-    active: uat
+    active: dev
   config:
     import: optional:configserver:http://configserver:8088/
 #  cloud:

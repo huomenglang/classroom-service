@@ -8,11 +8,13 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Mapper(componentModel = "spring")
 public abstract class ClassroomMapper {
-   protected GradeRepository gradeRepository;
+    protected GradeRepository gradeRepository;
 
+    @Autowired
     public void ClassroomMapper(GradeRepository gradeRepository) {
         this.gradeRepository = gradeRepository;
     }

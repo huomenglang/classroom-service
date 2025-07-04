@@ -8,7 +8,7 @@ import lombok.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "classromm")
+@Table(name = "classrooms")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Setter
 public class ClassRoom extends AuditEntity<Long> implements Serializable {
 
-    @Column(unique = true, nullable = false,length = 30)
+    @Column(unique = true,length = 30,nullable = false)
     private String name;
 
     @ManyToOne

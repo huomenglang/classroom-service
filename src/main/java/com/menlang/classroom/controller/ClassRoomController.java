@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/classrooms")
+@RequestMapping("api/v1/classrooms")
 @RequiredArgsConstructor
 public class ClassRoomController {
     private final ClassroomService classroomService;
