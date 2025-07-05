@@ -9,7 +9,11 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 @Entity
-@Table(name = "timeslots")
+@Table(name = "timeslots",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"name", "dayOfWeek"})
+        }
+)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,14 +21,18 @@ import java.time.LocalTime;
 @Setter
 public class Timeslot extends AuditEntity<Long> implements Serializable {
 
+    @Column(nullable = false,length = 100)
     private String name; // e.g., "Period 1", "Morning Session"
 
+    @Column(name = "start_time")
     private LocalTime startTime;
 
+    @Column(name = "end_time")
     private LocalTime endTime;
 
     private Integer ordinal; // For sorting (1, 2, 3, ...)
 
+    @Column(name = "day_of_week")
     @Enumerated(EnumType.STRING)
     private DayOfWeek dayOfWeek; // Optional, if schedule i
 
