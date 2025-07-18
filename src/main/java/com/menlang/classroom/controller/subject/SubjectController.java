@@ -1,4 +1,4 @@
-package com.menlang.classroom.controller;
+package com.menlang.classroom.controller.subject;
 import com.menglang.common.library.page.PageResponse;
 import com.menglang.common.library.page.PageResponseHandler;
 import com.menlang.classroom.dto.subject.SubjectRequest;

@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -81,7 +82,6 @@ public class ClassroomServiceImpl implements ClassroomService{
     public ClassroomResponse getById(Long id) {
         ClassRoom classRoom=this.findClassroomById(id);
         return classroomMapper.toResponse(classRoom);
-
     }
 
     @Override

@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -83,10 +84,7 @@ public class SubjectServiceImpl implements SubjectService {
     public SubjectResponse getById(Long id) {
         Subject subject=this.findSubjectById(id);
         return mapper.toResponse(subject);
-
     }
-
-
 
     @Override
     public Page<Subject> getAll(Map<String, String> params) {

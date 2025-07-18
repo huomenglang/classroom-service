@@ -12,9 +12,7 @@ import com.menlang.classroom.dto.timeslot.TimeslotRequest;
 import com.menlang.classroom.dto.timeslot.TimeslotResponse;
 import com.menlang.classroom.model.entities.Timeslot;
 import com.menlang.classroom.repository.TimeslotRepository;
-import com.menlang.classroom.service.BaseService;
 import lombok.RequiredArgsConstructor;
-import org.bouncycastle.util.Times;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -25,6 +23,7 @@ import org.springframework.stereotype.Service;
 import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
