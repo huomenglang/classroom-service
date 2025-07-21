@@ -44,7 +44,7 @@ public class Attendance extends AuditEntity<Long> implements Serializable {
     @JoinColumn(name = "time_slot_id")
     private Timeslot timeslot;
 
-    @CreatedDate
-    @Column(name = "attendance_date")
-    private LocalDateTime datetime;
+//    @CreatedDate
+//    @Column(name = "attendance_date")
+//    private LocalDateTime datetime;
 }

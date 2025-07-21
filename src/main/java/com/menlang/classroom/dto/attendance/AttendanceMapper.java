@@ -16,10 +16,13 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Mapper(componentModel = "spring")
 public abstract class AttendanceMapper {
+    private static final Logger log = LoggerFactory.getLogger(AttendanceMapper.class);
     @Autowired
     protected ClassroomRepository classroomRepository;
 
@@ -37,7 +40,7 @@ public abstract class AttendanceMapper {
 
     @Mapping(target = "classroom", expression = "java(toClassroom(dto.classRoomId()))")
     @Mapping(target = "subject", expression = "java(toSubject(dto.subjectId()))")
-    @Mapping(target = "timeslot", expression = "java(toTimeslot(dto.timeSlotId()))")
+    @Mapping(target = "timeslot", expression = "java(toTimeslot(dto.timeslotId()))")
     public abstract Attendance toEntity(AttendanceRequest dto);
 
 
@@ -55,16 +58,18 @@ public abstract class AttendanceMapper {
     @Mapping(target = "updatedBy", ignore = true)
     @Mapping(target = "classroom", expression = "java(toClassroom(dto.classRoomId()))")
     @Mapping(target = "subject", expression = "java(toSubject(dto.subjectId()))")
-    @Mapping(target = "timeslot", expression = "java(toTimeslot(dto.timeSlotId()))")
+    @Mapping(target = "timeslot", expression = "java(toTimeslot(dto.timeslotId()))")
     public abstract void updatedAttendance(AttendanceRequest dto, @MappingTarget Attendance attendance);
 
     @Named("toClassroom")
     protected ClassRoom toClassroom(Long classroomId){
+      log.info("classroom ID: {}",classroomId);
         return classroomRepository.findById(classroomId).orElseThrow(()->new NotFoundException("Classroom Not Found!"));
     }
 
     @Named("toSubject")
     protected Subject toSubject(Long subjectId){
+        log.info("subject id: {}",subjectId);
         return subjectRepository.findById(subjectId).orElseThrow(()->new NotFoundException("Subject Not Found!"));
     }
 
@@ -85,6 +90,7 @@ public abstract class AttendanceMapper {
 
     @Named("toTimeslot")
     protected Timeslot toTimeslot(Long timeslotId){
+        log.info("timeslot id: {}",timeslotId);
         return timeslotRepository.findById(timeslotId).orElseThrow(()->new NotFoundException("Timeslot Not Found!"));
     }
 

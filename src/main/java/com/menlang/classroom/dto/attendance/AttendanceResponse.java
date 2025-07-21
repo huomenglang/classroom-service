@@ -1,8 +1,6 @@
 package com.menlang.classroom.dto.attendance;
-
 import com.menglang.common.library.page.paginate.BasePageResponse;
 import com.menlang.classroom.dto.classroom.ClassRoomBaseResponse;
-import com.menlang.classroom.dto.classroom.ClassroomResponse;
 import com.menlang.classroom.dto.student.StudentResponse;
 import com.menlang.classroom.dto.subject.SubjectResponse;
 import com.menlang.classroom.dto.teacher.TeacherResponse;
@@ -25,7 +23,6 @@ public class AttendanceResponse extends BasePageResponse implements Serializable
     private SubjectResponse subject;
     private TimeslotResponse timeslot;
     private Long academicYearId;
-    private LocalDateTime datetime;
 
     private LocalDateTime createdAt;
     private String createdBy;

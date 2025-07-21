@@ -29,7 +29,9 @@ public class AttendanceServiceImpl implements AttendanceService{
 
     @Override
     public AttendanceResponse create(AttendanceRequest dto) {
+//        log.info("data dto: {}",dto.datetime());
         Attendance attendance=attendanceMapper.toEntity(dto);
+//        log.info("data date after: {}",attendance.getDatetime());
         try{
             return attendanceMapper.toResponse(attendanceRepository.save(attendance));
         }catch (BadRequestException e){
