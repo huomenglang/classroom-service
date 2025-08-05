@@ -5,6 +5,7 @@ import com.menlang.classroom.model.enums.DayOfWeek;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 @Builder
 @AllArgsConstructor
@@ -12,15 +13,15 @@ import java.time.LocalTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "class_schedule")
-public class TimeTable extends AuditEntity<Long> {
+@Table(name = "timetables")
+public class TimeTable extends AuditEntity<Long> implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "classroom_id")
     private ClassRoom classroom;
 
     @Column(name = "academic_year_id")
-    private Long academicYeaId;
+    private Long academicYearId;
 
     @ManyToOne
     @JoinColumn(name = "subject_id")
@@ -31,12 +32,15 @@ public class TimeTable extends AuditEntity<Long> {
 
     @Enumerated(EnumType.STRING)
     @Column(length = 15,name = "day_of_week")
-    private DayOfWeek DayOfWeek;
+    private DayOfWeek dayOfWeek;
 
     @Column(name = "start_time")
     private LocalTime startTime;
 
     @Column(name = "end_time")
     private LocalTime endTime;
+
+    @Column(name = "description",length = 150)
+    private String description;
 
 }
