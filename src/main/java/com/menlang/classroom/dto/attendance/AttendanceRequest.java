@@ -1,8 +1,6 @@
 package com.menlang.classroom.dto.attendance;
 import com.menlang.classroom.model.enums.AttendanceStatus;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-
 import java.io.Serializable;
 
 public record AttendanceRequest(

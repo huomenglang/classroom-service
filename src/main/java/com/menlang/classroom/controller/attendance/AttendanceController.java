@@ -24,7 +24,6 @@ public class AttendanceController {
 
     @PostMapping
     public ResponseEntity<PageResponse> create(@RequestBody AttendanceRequest request){
-//        log.info("date time: {}",request.datetime());
         return PageResponseHandler.success(attendanceService.create(request),null,"Create Success");
     }
 

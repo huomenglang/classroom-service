@@ -20,7 +20,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/v1/grades")
 @RequiredArgsConstructor
-public class GradeController {
+public class    GradeController {
     private static final Logger log = LoggerFactory.getLogger(GradeController.class);
     private final GradeService gradeService;
 
