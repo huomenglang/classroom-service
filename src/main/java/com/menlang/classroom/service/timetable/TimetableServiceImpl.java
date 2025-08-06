@@ -97,4 +97,16 @@ public class TimetableServiceImpl implements TimetableService{
     private TimeTable findTimetableById(Long id ){
         return timetableRepository.findById(id).orElseThrow(()->new NotFoundException("Timetable Not found!"));
     }
+
+    @Override
+    public List<TimetableResponse> findTimetableByClassroom(Long classroomId, Long academicYearId) {
+        List<TimeTable> classroomTimetables=timetableRepository.findTimeTablesByClassroom(classroomId,academicYearId);
+        return classroomTimetables.stream().map(timetableMapper::toResponse).toList();
+    }
+
+    @Override
+    public List<TimetableResponse> findTimetableByTeacher(Long teacherId, Long academicYearId) {
+        List<TimeTable> timetablesOfTeacher=timetableRepository.findTimeTablesByClassroom(teacherId,academicYearId);
+        return timetablesOfTeacher.stream().map(timetableMapper::toResponse).toList();
+    }
 }

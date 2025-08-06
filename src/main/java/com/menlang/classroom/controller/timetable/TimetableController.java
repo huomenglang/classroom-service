@@ -48,4 +48,23 @@ public class TimetableController {
         return PageResponseHandler.success(timetableResponses,timeTablesPage,"Get Success");
     }
 
+    @GetMapping("/classroom/{classroomId}/academic-year/{academicYearId}")
+    public ResponseEntity<PageResponse> getTimeTablesByClassroom(@PathVariable Long classroomId,@PathVariable Long academicYearId){
+        List<TimetableResponse> timetableResponses=timetableService.findTimetableByClassroom(classroomId,academicYearId);
+        return PageResponseHandler.success(timetableResponses,null,"Get Success");
+    }
+
+    @GetMapping("/teacherId/{teacherId}/academic-year-id/{academicYearId}")
+    public ResponseEntity<PageResponse> getTimeTablesByTeacher(@PathVariable Long teacherId,@PathVariable Long academicYearId){
+        List<TimetableResponse> timetableResponses=timetableService.findTimetableByTeacher(teacherId,academicYearId);
+        return PageResponseHandler.success(timetableResponses,null,"Get Success");
+    }
+
+    @GetMapping("/teacher/{teacherId}/academic-year/{academicYearId}")
+    public ResponseEntity<List<TimetableResponse>> exposeTimetableToTeacher(@PathVariable Long teacherId,@PathVariable Long academicYearId){
+        List<TimetableResponse> timetableResponses=timetableService.findTimetableByTeacher(teacherId,academicYearId);
+        return ResponseEntity.ok(timetableResponses);
+    }
+
+
 }

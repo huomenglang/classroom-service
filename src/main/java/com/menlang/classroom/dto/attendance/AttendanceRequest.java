@@ -2,6 +2,7 @@ package com.menlang.classroom.dto.attendance;
 import com.menlang.classroom.model.enums.AttendanceStatus;
 import jakarta.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 public record AttendanceRequest(
 
@@ -18,7 +19,7 @@ public record AttendanceRequest(
         @NotBlank(message = "Status Must be be Blank!")
         AttendanceStatus status,
         @NotBlank(message = "Timeslot Must be be Blank!")
-        Long timeslotId
-//        LocalDateTime datetime
+        Long timeslotId,
+        LocalDateTime datetime
 ) implements Serializable {
 }

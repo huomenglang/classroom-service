@@ -7,13 +7,22 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalTime;
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "timetables")
+@Table(name = "timetables",
+        indexes = {
+                @Index(name = "idx_teacher_id", columnList = "teacher_id"),
+                @Index(name = "idx_classroom_id", columnList = "classroom_id")
+        },
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"classroom_id", "academic_year_id"}
+                )
+        })
 public class TimeTable extends AuditEntity<Long> implements Serializable {
 
     @ManyToOne
@@ -31,7 +40,7 @@ public class TimeTable extends AuditEntity<Long> implements Serializable {
     private Long teacherId;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 15,name = "day_of_week")
+    @Column(length = 15, name = "day_of_week")
     private DayOfWeek dayOfWeek;
 
     @Column(name = "start_time")
@@ -40,7 +49,7 @@ public class TimeTable extends AuditEntity<Long> implements Serializable {
     @Column(name = "end_time")
     private LocalTime endTime;
 
-    @Column(name = "description",length = 150)
+    @Column(name = "description", length = 150)
     private String description;
 
 }

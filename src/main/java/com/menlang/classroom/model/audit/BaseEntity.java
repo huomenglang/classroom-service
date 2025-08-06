@@ -21,7 +21,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public abstract class BaseEntity<T extends Serializable> {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private T id;
 
 }
